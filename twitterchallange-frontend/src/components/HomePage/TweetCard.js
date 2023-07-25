@@ -16,6 +16,7 @@ import {
   sendSubDislikeofTweetsCreator,
   sendSubLikesofUserCreator,
   sendSubDislikesofUserCreator,
+  getSubTweetsActionCreator,
 } from "../../store/actions/tweetAction";
 
 function TweetCard({ tweet }) {
@@ -61,6 +62,7 @@ function TweetCard({ tweet }) {
       key={tweet.tweet_id}
       onClick={() => {
         navigate("/" + tweet.userName + "/" + tweet.tweet_id);
+        window.location.reload();
       }}
     >
       <div id="tweetCardImg">

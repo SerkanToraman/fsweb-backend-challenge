@@ -44,7 +44,7 @@ function HomePage() {
           >
             Home Page
           </button>
-          <button
+          {/* <button
             id="homePageleftNavBarBtn"
             onClick={() => {
               navigate("/home/b");
@@ -52,10 +52,10 @@ function HomePage() {
             }}
           >
             Profile
-          </button>
+          </button> */}
         </nav>
         <nav id="homePageleftNavBarPersonalBtns">
-          <button id="homePageleftNavBarBtn">Settings</button>
+          {/* <button id="homePageleftNavBarBtn">Settings</button> */}
           <button
             id="logoutBtn"
             onClick={() => {

@@ -2,8 +2,12 @@ import axios from "axios";
 
 const axiosWithAuth = () => {
   const user = localStorage.getItem("user");
+  //console.log("ENV", process.env);
+  let URL =
+    "https://serkantoraman-twitterproject.onrender.com" ||
+    "http://localhost:9000";
   return axios.create({
-    baseURL: "http://localhost:9000",
+    baseURL: "https://serkantoraman-twitterproject.onrender.com",
     headers: {
       Authorization: JSON.parse(user).token,
     },
