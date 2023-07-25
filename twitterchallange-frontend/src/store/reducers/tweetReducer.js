@@ -22,4 +22,3 @@ export function tweetReducer(state = initialState, action) {
       return state;
   }
 }
-
