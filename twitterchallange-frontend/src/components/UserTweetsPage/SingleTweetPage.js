@@ -10,12 +10,12 @@ import SendChildTweet from "./SendChildTweet";
 import { getSubTweetsActionCreator } from "../../store/actions/tweetAction";
 
 function SingleTweetPage() {
-  const { tweetid } = useParams();
   const dispatch = useDispatch();
+  const { tweetid } = useParams();
   const childTweetById = useSelector((store) => store.tweetReducer.subPage);
   useEffect(() => {
     dispatch(getSubTweetsActionCreator(tweetid));
-  }, []);
+  }, [tweetid]);
 
   return (
     <>

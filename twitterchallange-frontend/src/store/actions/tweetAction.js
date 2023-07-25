@@ -9,7 +9,11 @@ import axiosWithAuth from "../../endpoints/AxiosAuth";
 export const tweetActions = {
   getTweets: "GET_TWEETS",
   getSubTweets: "GET_SUBTWEETS",
-  getSubTweetsSubs: "GET_SUBTWEETSSUBS",
+  getUserTweets: "GET_SUBTWEETSSUBS",
+  sendSubTweets: "SEND_SUBTWEETS",
+  getSingleTweet: "GET_SINGLETWEET",
+  likeTweet: "LIKE_TWEET",
+  dislikeTweet: "DISLIKE_TWEET",
 };
 
 export const getTweetsActionCreator = () => (dispatch) => {
@@ -31,6 +35,7 @@ export const sendTweetsActionCreator = (data) => (dispatch) => {
     });
 };
 export const deleteTweetsActionCreator = (data) => (dispatch) => {
+  console.log(data);
   axiosWithAuth()
     .post("/api/tweets", data)
     .then((res) => {
@@ -49,24 +54,91 @@ export const getSubTweetsActionCreator = (tweetid) => (dispatch) => {
       console.log(res.data);
     });
 };
-
-export const getSubTweetsofSubsActionCreator = (tweetid) => (dispatch) => {
+export const sendSubTweetsActionCreator = (dataSet) => (dispatch) => {
+  const { data, tweetid } = dataSet;
+  console.log(tweetid);
   axiosWithAuth()
-    .get("/api/tweets/" + tweetid)
+    .post("/api/tweets/newtweet", data)
+    .then((res) => {
+      dispatch(getSubTweetsActionCreator(tweetid));
+    });
+};
+export const deleteSubTweetsActionCreator = (dataSet) => (dispatch) => {
+  const { data, tweetid } = dataSet;
+  axiosWithAuth()
+    .post("/api/tweets", data)
+    .then((res) => {
+      dispatch(getSubTweetsActionCreator(tweetid));
+    });
+};
+export const getUserTweetsofSubsActionCreator = (userName) => (dispatch) => {
+  axiosWithAuth()
+    .get("/api/tweets/mainpage/" + userName)
     .then((res) => {
       dispatch({
-        type: tweetActions.getSubTweetsSubs,
+        type: tweetActions.getUserTweets,
         payload: res.data,
       });
       console.log(res.data);
     });
 };
+export const getTweetByIdActionCreator = (tweetid) => (dispatch) => {
+  axiosWithAuth()
+    .get("/api/tweets/" + tweetid)
+    .then((res) => {
+      dispatch({
+        type: tweetActions.getSingleTweet,
+        payload: res.data,
+      });
+    });
+};
+export const sendLikesCreator = (data) => (dispatch) => {
+  console.log("likeData", data);
+  axiosWithAuth()
+    .post("/api/likes/like", data)
+    .then((res) => {
+      dispatch(getTweetsActionCreator());
+    });
+};
+export const sendDislikeCreator = (data) => (dispatch) => {
+  axiosWithAuth()
+    .post("/api/likes/likes", data)
+    .then((res) => {
+      dispatch(getTweetsActionCreator());
+    });
+};
+export const sendSubLikesofTweetsCreator = (dataSet) => (dispatch) => {
+  const { data, tweetid } = dataSet;
+  console.log("likeData", data);
+  axiosWithAuth()
+    .post("/api/likes/like", data)
+    .then((res) => {
+      dispatch(getSubTweetsActionCreator(tweetid));
+    });
+};
+export const sendSubDislikeofTweetsCreator = (dataSet) => (dispatch) => {
+  const { data, tweetid } = dataSet;
+  axiosWithAuth()
+    .post("/api/likes/likes", data)
+    .then((res) => {
+      dispatch(getSubTweetsActionCreator(tweetid));
+    });
+};
 
-export const homePageResetIncrease = "RESET_SCREEN_INCREASE";
-export const homePageResetDecrease = "RESET_SCREEN_DECREASE";
-export const setHomePageResetIncrease = () => ({
-  type: homePageResetIncrease,
-});
-export const setHomePageResetDecrease = () => ({
-  type: homePageResetDecrease,
-});
+export const sendSubLikesofUserCreator = (dataSet) => (dispatch) => {
+  const { data, userName } = dataSet;
+  console.log("likeData", data);
+  axiosWithAuth()
+    .post("/api/likes/like", data)
+    .then((res) => {
+      dispatch(getUserTweetsofSubsActionCreator(userName));
+    });
+};
+export const sendSubDislikesofUserCreator = (dataSet) => (dispatch) => {
+  const { data, userName } = dataSet;
+  axiosWithAuth()
+    .post("/api/likes/likes", data)
+    .then((res) => {
+      dispatch(getUserTweetsofSubsActionCreator(userName));
+    });
+};

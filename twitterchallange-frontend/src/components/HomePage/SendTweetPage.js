@@ -5,15 +5,11 @@ import { useDispatch } from "react-redux";
 
 //Internal JS
 import { AuthContext } from "../../context/AuthContext";
-//import useAxios, { REQ_TYPES } from "../../endpoints/UseAxios";
-//import { setHomePageResetIncrease } from "../../store/actions/tweetAction";
 import { sendTweetsActionCreator } from "../../store/actions/tweetAction";
 
 function SendTweetPage() {
   const dispatch = useDispatch();
   const { loginData } = useContext(AuthContext);
-  //const [sendTweets, sentTweets, loading, error] = useAxios([]);
-
   const {
     register,
     handleSubmit,

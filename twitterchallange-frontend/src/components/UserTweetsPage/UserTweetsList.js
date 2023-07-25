@@ -1,36 +1,27 @@
 //Outsource JS library
-import React,{useEffect} from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 //Internal JS
-import useAxios, {REQ_TYPES} from '../../endpoints/UseAxios';
-import TweetCard from '../HomePage/TweetCard';
+import TweetCard from "../HomePage/TweetCard";
+import { getUserTweetsofSubsActionCreator } from "../../store/actions/tweetAction";
 
 function UserTweetsList() {
-
-const {tweetid,userName} = useParams();
-
-const [getTweets, tweets, loading, error] = useAxios([]);
-//const button =useSelector((store) => store.tweetReducer.buttonCount);
-
-
-useEffect(() => {
-  getTweets({ endpoint: "/api/tweets/mainpage/"+userName, reqType: REQ_TYPES.GET });
-  //console.log('buttonsingke',button)
-}, [tweets]);
-
-
+  const { userName } = useParams();
+  const dispatch = useDispatch();
+  const tweets = useSelector((store) => store.tweetReducer.userPage);
+  useEffect(() => {
+    dispatch(getUserTweetsofSubsActionCreator(userName));
+  }, []);
 
   return (
-    <div id='tweetCardsMainContainer'>
-     {tweets.map((tweetitem,i)=>(<TweetCard
-        tweet={tweetitem}
-        key={i}
-        />
+    <div id="tweetCardsMainContainer">
+      {tweets?.map((tweetitem, i) => (
+        <TweetCard tweet={tweetitem} key={i} />
       ))}
     </div>
-  )
+  );
 }
 
-export default UserTweetsList
+export default UserTweetsList;

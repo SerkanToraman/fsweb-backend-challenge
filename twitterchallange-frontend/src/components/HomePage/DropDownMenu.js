@@ -1,16 +1,25 @@
 //External JS
 import React, { useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 //Internal JS
 import { AuthContext } from "../../context/AuthContext";
-import { deleteTweetsActionCreator } from "../../store/actions/tweetAction";
+import {
+  deleteTweetsActionCreator,
+  deleteSubTweetsActionCreator,
+} from "../../store/actions/tweetAction";
 
 function DropDownMenu({ tweet, setDropDownUnique }) {
   const dispatch = useDispatch();
+  const { tweetid } = useParams();
   const { loginData } = useContext(AuthContext);
   const deleteTweetSubmit = async (data) => {
-    dispatch(deleteTweetsActionCreator(data));
+    if (!tweetid) {
+      dispatch(deleteTweetsActionCreator(data));
+    } else {
+      dispatch(deleteSubTweetsActionCreator({ data, tweetid }));
+    }
     setDropDownUnique(false);
   };
   return (

@@ -5,29 +5,37 @@ import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 
 //Internal JS
-import { getSubTweetsofSubsActionCreator } from "../../store/actions/tweetAction";
+// import { getTweetByIdActionCreator } from "../../store/actions/tweetAction";
+import useAxios, { REQ_TYPES } from "../../endpoints/UseAxios";
 
 function SingleTweet() {
-  const dispatch = useDispatch();
   const { tweetid } = useParams();
-  const tweetById = useSelector((store) => store.tweetReducer);
+  // const dispatch = useDispatch();
+  // const tweetById = useSelector((store) => store.tweetReducer.singleTweet);
+  // useEffect(() => {
+  //     dispatch(getTweetByIdActionCreator(tweetid));
+  // }, []);
 
+  const [getTweetById, tweetById, loading, error] = useAxios([]);
   useEffect(() => {
-    dispatch(getSubTweetsofSubsActionCreator(tweetid));
-  }, []);
+    getTweetById({
+      endpoint: "/api/tweets/" + tweetid,
+      reqType: REQ_TYPES.GET,
+    });
+  }, [tweetById]);
 
   return (
-    <section id="tweetCardContainer" key={tweetById.tweet_id}>
+    <section id="tweetCardContainer" key={tweetById?.tweet_id}>
       <div id="tweetCardImg">
         <i className="fa-solid fa-user fa-xl"></i>
       </div>
       <div id="tweetContainer">
         <div id="tweetContainerTop">
-          <h3 id="tweetContainerTopName">{tweetById.name}</h3>
-          <h3 id="tweetContainerTopUserName">@{tweetById.userName}</h3>
+          <h3 id="tweetContainerTopName">{tweetById?.name}</h3>
+          <h3 id="tweetContainerTopUserName">@{tweetById?.userName}</h3>
           <div id="tweetContainerTopIconWrapper">
             <p id="tweetContainerTopTime">
-              {moment(tweetById.created_at).fromNow()}
+              {moment(tweetById?.created_at).fromNow()}
             </p>
             <button id="tweetContainerTopIcon">
               <i
@@ -37,7 +45,7 @@ function SingleTweet() {
             </button>
           </div>
         </div>
-        <div id="tweetContainerMid"> {tweetById.tweet} </div>
+        <div id="tweetContainerMid"> {tweetById?.tweet} </div>
         <div id="tweetContainerBottom">
           <button id="tweetContainerBottomMessageIcon_Wrapper">
             <div id="tweetContainerMessageIcon">
