@@ -12,13 +12,13 @@ function UserTweetsList() {
 const {tweetid,userName} = useParams();
 
 const [getTweets, tweets, loading, error] = useAxios([]);
-const button =useSelector((store) => store.tweetReducer.buttonCount);
+//const button =useSelector((store) => store.tweetReducer.buttonCount);
 
 
 useEffect(() => {
   getTweets({ endpoint: "/api/tweets/mainpage/"+userName, reqType: REQ_TYPES.GET });
   //console.log('buttonsingke',button)
-}, [button]);
+}, [tweets]);
 
 
 

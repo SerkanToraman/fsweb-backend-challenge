@@ -1,16 +1,23 @@
-import axios from 'axios';
+import axios from "axios";
 
-const axiosWithAuth=()=>{
-  const user = localStorage.getItem('user');
+const axiosWithAuth = () => {
+  const user = localStorage.getItem("user");
   return axios.create({
-    baseURL:"https://serkantoraman-twitterproject.onrender.com",
+    baseURL: "http://localhost:9000",
     headers: {
-      Authorization:JSON.parse(user).token
-    }
-})
-}
+      Authorization: JSON.parse(user).token,
+    },
+  });
+};
 
 export default axiosWithAuth;
 
 //"https://serkantoraman-twitterproject.onrender.com"
 //"http://localhost:9000"
+
+// export let API = axiosWithAuth();
+
+// export const renewToken = (user)=>{
+//     localStorage.setItem("user",user);
+//     API = axiosWithAuth();
+// }

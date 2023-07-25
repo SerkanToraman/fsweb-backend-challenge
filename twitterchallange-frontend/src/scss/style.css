@@ -562,6 +562,9 @@ table {
           #homePageContainer #homePageMainSection #sendTweetMainContainer #sendTweetForm #sendTweetButtonWrapper button:hover {
             background-color: #252128; }
 
+@media (max-width: 1480px) {
+  #homePageContainer {
+    width: 100%; } }
 #homePageContainer {
   width: 1630px;
   overflow: hidden;
@@ -1265,5 +1268,9 @@ table {
                 position: absolute;
                 top: 1.3rem;
                 left: 0.6rem; }
+
+@media (max-width: 1480px) {
+  #homePageContainer {
+    width: 100%; } }
 
 /*# sourceMappingURL=style.css.map */
