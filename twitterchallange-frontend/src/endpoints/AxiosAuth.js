@@ -1,13 +1,19 @@
 import axios from "axios";
+import io from "socket.io-client";
 
 const axiosWithAuth = () => {
+  let socket = io();
+  const SOCKET_URL = "http://localhost:9000";
+  socket.on("connect", () => {
+    console.log("Conntected to server");
+  });
   const user = localStorage.getItem("user");
   //console.log("ENV", process.env);
-  let URL =
-    "https://serkantoraman-twitterproject.onrender.com" ||
-    "http://localhost:9000";
+  // let URL =
+  //   "https://serkantoraman-twitterproject.onrender.com" ||
+  //   "http://localhost:9000";
   return axios.create({
-    baseURL: "https://serkantoraman-twitterproject.onrender.com",
+    baseURL: SOCKET_URL,
     headers: {
       Authorization: JSON.parse(user).token,
     },

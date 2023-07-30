@@ -1,6 +1,8 @@
 //Imports
+const http = require("http");
 const express = require('express');
-const server = express();
+const app = express();
+const socketIO = require("socket.io");
 const cors = require('cors');
 const helmet = require('helmet');
 require('dotenv').config();
@@ -15,35 +17,40 @@ const likeRouter = require('./likesFollowers/likesFollowers-routers')
 const {mwRestricted} = require('../api/auth/auth-middleware')
 
 //External
-server.use(helmet());
-server.use(express.json());
+app.use(helmet());
+app.use(express.json());
 var corsOptions = {
   origin:'*', 
   credentials:true,            //access-control-allow-credentials:true
   optionSuccessStatus:200
 }
-server.use(cors(corsOptions))
+app.use(cors(corsOptions));
+const server = http.createServer(app);
+const io = socketIO(server)
+io.on("connection",socket=>{
+  console.log(socket.id)
+})
 
 
 
 
 //Routers
 //Smoke test
-// server.get('/',(req,res)=>{
+// app.get('/',(req,res)=>{
 //   res.json('smoke test successfull')
 // })
-server.use('/api/auth',authRouter)
-server.use('/api/users',mwRestricted,userRouter)
-server.use('/api/tweets',mwRestricted,tweetRouter)
-server.use('/api/likes',mwRestricted,likeRouter)
+app.use('/api/auth',authRouter)
+app.use('/api/users',mwRestricted,userRouter)
+app.use('/api/tweets',mwRestricted,tweetRouter)
+app.use('/api/likes',mwRestricted,likeRouter)
 
 
 //4. error middleware
 
-server.use((err,req,res,next)=>{
+app.use((err,req,res,next)=>{
   res.status(err.status || 500)
-      .json({message: err.message || "Server error!..."})
+      .json({message: err.message || "app error!..."})
 })
 
 //export
-module.exports = server;
+module.exports = app;
