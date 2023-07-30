@@ -25,7 +25,8 @@
     "jsonwebtoken": "^9.0.1",
     "knex": "^2.4.2",
     "socket.io": "^4.7.1",
-    "sqlite3": "5.0.8"
+    "sqlite3": "5.0.8",
+    "twit": "^2.2.11"
   },
   "devDependencies": {
     "@types/jest": "^27.5.2",

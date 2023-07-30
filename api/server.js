@@ -1,6 +1,6 @@
 //Imports
-const path = require("path");
 const http = require("http");
+var path = require("path");
 let express = require("express");
 const app = express();
 let server = http.createServer(app);
@@ -12,16 +12,15 @@ const authRouter = require("./auth/auth-router");
 const userRouter = require("./user/users-routers");
 const tweetRouter = require("./tweets/tweets-routers");
 const likeRouter = require("./likesFollowers/likesFollowers-routers");
-const publicPath = path.join(__dirname, "/../public");
 
 //Middlewares
 //Internal
 const { mwRestricted } = require("../api/auth/auth-middleware");
 
 //External
-app.use(express.static(publicPath));
 app.use(helmet());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 // var corsOptions = {
 //   origin: "*",
 //   credentials: true, //access-control-allow-credentials:true
@@ -35,15 +34,11 @@ const io = socketIO(server, {
     origin: "*",
   },
 });
-io.on("connection", (socket) => {
-  console.log("a user is connected");
-  
-    socket.on("chat message", (message) => {
-      console.log("Received message:", message); 
-    });
-    socket.on("disconnect", () => {
-      console.log("a user disconnected");
-    });
+io.on("connection", function (socket) {
+  //receiving the newtweer from sendTweetPage
+  socket.on("newTweet", (msg) => {
+    io.emit("message", msg);
+  });
 });
 
 //Routers

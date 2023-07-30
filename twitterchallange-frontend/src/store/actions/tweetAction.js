@@ -1,6 +1,7 @@
 //Outsource JS library
 import React from "react";
 
+
 //Internal JS
 import axiosWithAuth from "../../endpoints/AxiosAuth";
 
@@ -28,10 +29,12 @@ export const getTweetsActionCreator = () => (dispatch) => {
     });
 };
 export const sendTweetsActionCreator = (data) => (dispatch) => {
+  
   axiosWithAuth()
     .post("/api/tweets/newtweet", data)
     .then((res) => {
       dispatch(getTweetsActionCreator());
+      
     });
 };
 export const deleteTweetsActionCreator = (data) => (dispatch) => {
