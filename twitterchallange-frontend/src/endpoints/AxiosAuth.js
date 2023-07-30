@@ -2,9 +2,8 @@ import axios from "axios";
 import io from "socket.io-client";
 
 const axiosWithAuth = () => {
-  let socket = io();
-  const SOCKET_URL =
-    "https://serkantoraman-twitterproject-socket-io.onrender.com";
+  const SOCKET_URL = "https://serkantoraman-twitterproject.onrender.com";
+  let socket = io(SOCKET_URL);
   socket.on("connect", () => {
     console.log("Conntected to server");
   });
