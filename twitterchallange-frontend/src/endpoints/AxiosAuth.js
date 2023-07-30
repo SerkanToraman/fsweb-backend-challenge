@@ -3,7 +3,7 @@ import io from "socket.io-client";
 
 const axiosWithAuth = () => {
   let socket = io();
-  const SOCKET_URL = "http://localhost:9000";
+  const SOCKET_URL = "https://serkantoraman-twitterproject.onrender.com";
   socket.on("connect", () => {
     console.log("Conntected to server");
   });
