@@ -10,7 +10,7 @@ const axiosWithAuth = () => {
   //   "http://localhost:9000";
   //https://serkantoraman-twitterproject-socket-io.onrender.com
   return axios.create({
-    baseURL: "http://localhost:9000",
+    baseURL: "https://serkantoraman-twitterproject-socket-io.onrender.com",
     headers: {
       Authorization: JSON.parse(user).token,
     },
@@ -23,4 +23,4 @@ export default axiosWithAuth;
 //"http://localhost:9000"
 
 
-export const SOCKET_URL = "http://localhost:9000";
+export const SOCKET_URL = "https://serkantoraman-twitterproject-socket-io.onrender.com";
