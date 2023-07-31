@@ -2,10 +2,6 @@ import axios from "axios";
 
 
 const axiosWithAuth = () => {
-  const SOCKET_URL = "http://localhost:9000";
-  
-   
-  
   
   const user = localStorage.getItem("user");
   //console.log("ENV", process.env);
@@ -26,9 +22,5 @@ export default axiosWithAuth;
 //"https://serkantoraman-twitterproject.onrender.com"
 //"http://localhost:9000"
 
-// export let API = axiosWithAuth();
 
-// export const renewToken = (user)=>{
-//     localStorage.setItem("user",user);
-//     API = axiosWithAuth();
-// }
+export const SOCKET_URL = "http://localhost:9000";

@@ -1,9 +1,10 @@
 //Outsource JS library
 import React from "react";
-
+import io from "socket.io-client";
 
 //Internal JS
 import axiosWithAuth from "../../endpoints/AxiosAuth";
+import { SOCKET_URL } from "../../endpoints/AxiosAuth";
 
 //Action Creators
 
@@ -17,6 +18,7 @@ export const tweetActions = {
   dislikeTweet: "DISLIKE_TWEET",
 };
 
+let socket = io(SOCKET_URL);
 export const getTweetsActionCreator = () => (dispatch) => {
   axiosWithAuth()
     .get("/api/tweets/mainpage")
@@ -29,12 +31,11 @@ export const getTweetsActionCreator = () => (dispatch) => {
     });
 };
 export const sendTweetsActionCreator = (data) => (dispatch) => {
-  
   axiosWithAuth()
     .post("/api/tweets/newtweet", data)
     .then((res) => {
       dispatch(getTweetsActionCreator());
-      
+      socket.emit("newTweet", "deneme");
     });
 };
 export const deleteTweetsActionCreator = (data) => (dispatch) => {
@@ -43,6 +44,7 @@ export const deleteTweetsActionCreator = (data) => (dispatch) => {
     .post("/api/tweets", data)
     .then((res) => {
       dispatch(getTweetsActionCreator());
+      socket.emit("newTweet", "deneme");
     });
 };
 
@@ -64,6 +66,7 @@ export const sendSubTweetsActionCreator = (dataSet) => (dispatch) => {
     .post("/api/tweets/newtweet", data)
     .then((res) => {
       dispatch(getSubTweetsActionCreator(tweetid));
+      socket.emit("newTweet", "deneme");
     });
 };
 export const deleteSubTweetsActionCreator = (dataSet) => (dispatch) => {
@@ -72,6 +75,7 @@ export const deleteSubTweetsActionCreator = (dataSet) => (dispatch) => {
     .post("/api/tweets", data)
     .then((res) => {
       dispatch(getSubTweetsActionCreator(tweetid));
+      socket.emit("newTweet", "deneme");
     });
 };
 export const getUserTweetsofSubsActionCreator = (userName) => (dispatch) => {
@@ -101,6 +105,7 @@ export const sendLikesCreator = (data) => (dispatch) => {
     .post("/api/likes/like", data)
     .then((res) => {
       dispatch(getTweetsActionCreator());
+      socket.emit("newTweet", "deneme");
     });
 };
 export const sendDislikeCreator = (data) => (dispatch) => {
@@ -108,6 +113,7 @@ export const sendDislikeCreator = (data) => (dispatch) => {
     .post("/api/likes/likes", data)
     .then((res) => {
       dispatch(getTweetsActionCreator());
+      socket.emit("newTweet", "deneme");
     });
 };
 export const sendSubLikesofTweetsCreator = (dataSet) => (dispatch) => {
@@ -117,6 +123,7 @@ export const sendSubLikesofTweetsCreator = (dataSet) => (dispatch) => {
     .post("/api/likes/like", data)
     .then((res) => {
       dispatch(getSubTweetsActionCreator(tweetid));
+      socket.emit("newTweet", "deneme");
     });
 };
 export const sendSubDislikeofTweetsCreator = (dataSet) => (dispatch) => {
@@ -125,6 +132,7 @@ export const sendSubDislikeofTweetsCreator = (dataSet) => (dispatch) => {
     .post("/api/likes/likes", data)
     .then((res) => {
       dispatch(getSubTweetsActionCreator(tweetid));
+      socket.emit("newTweet", "deneme");
     });
 };
 
@@ -135,6 +143,7 @@ export const sendSubLikesofUserCreator = (dataSet) => (dispatch) => {
     .post("/api/likes/like", data)
     .then((res) => {
       dispatch(getUserTweetsofSubsActionCreator(userName));
+      socket.emit("newTweet", "deneme");
     });
 };
 export const sendSubDislikesofUserCreator = (dataSet) => (dispatch) => {
@@ -143,5 +152,6 @@ export const sendSubDislikesofUserCreator = (dataSet) => (dispatch) => {
     .post("/api/likes/likes", data)
     .then((res) => {
       dispatch(getUserTweetsofSubsActionCreator(userName));
+      socket.emit("newTweet", "deneme");
     });
 };
