@@ -27,7 +27,7 @@ export const getTweetsActionCreator = () => (dispatch) => {
         type: tweetActions.getTweets,
         payload: res.data,
       });
-      console.log(res.data);
+      //console.log(res.data);
     });
 };
 export const sendTweetsActionCreator = (data) => (dispatch) => {
@@ -39,7 +39,7 @@ export const sendTweetsActionCreator = (data) => (dispatch) => {
     });
 };
 export const deleteTweetsActionCreator = (data) => (dispatch) => {
-  console.log(data);
+  //console.log(data);
   axiosWithAuth()
     .post("/api/tweets", data)
     .then((res) => {
@@ -56,12 +56,12 @@ export const getSubTweetsActionCreator = (tweetid) => (dispatch) => {
         type: tweetActions.getSubTweets,
         payload: res.data,
       });
-      console.log(res.data);
+      //console.log(res.data);
     });
 };
 export const sendSubTweetsActionCreator = (dataSet) => (dispatch) => {
   const { data, tweetid } = dataSet;
-  console.log(tweetid);
+  //console.log(tweetid);
   axiosWithAuth()
     .post("/api/tweets/newtweet", data)
     .then((res) => {
@@ -86,7 +86,7 @@ export const getUserTweetsofSubsActionCreator = (userName) => (dispatch) => {
         type: tweetActions.getUserTweets,
         payload: res.data,
       });
-      console.log(res.data);
+      //console.log(res.data);
     });
 };
 export const getTweetByIdActionCreator = (tweetid) => (dispatch) => {
@@ -100,7 +100,7 @@ export const getTweetByIdActionCreator = (tweetid) => (dispatch) => {
     });
 };
 export const sendLikesCreator = (data) => (dispatch) => {
-  console.log("likeData", data);
+  //console.log("likeData", data);
   axiosWithAuth()
     .post("/api/likes/like", data)
     .then((res) => {
@@ -118,7 +118,7 @@ export const sendDislikeCreator = (data) => (dispatch) => {
 };
 export const sendSubLikesofTweetsCreator = (dataSet) => (dispatch) => {
   const { data, tweetid } = dataSet;
-  console.log("likeData", data);
+  //console.log("likeData", data);
   axiosWithAuth()
     .post("/api/likes/like", data)
     .then((res) => {
@@ -138,7 +138,7 @@ export const sendSubDislikeofTweetsCreator = (dataSet) => (dispatch) => {
 
 export const sendSubLikesofUserCreator = (dataSet) => (dispatch) => {
   const { data, userName } = dataSet;
-  console.log("likeData", data);
+  //console.log("likeData", data);
   axiosWithAuth()
     .post("/api/likes/like", data)
     .then((res) => {

@@ -17,7 +17,7 @@ function SingleTweetPage() {
   let socket = io(SOCKET_URL);
   socket.on("message", (msg) => {
     dispatch(getSubTweetsActionCreator(tweetid));
-    console.log(msg);
+    //console.log(msg);
   });
   const childTweetById = useSelector((store) => store.tweetReducer.subPage);
   useEffect(() => {

@@ -12,7 +12,7 @@ function HomePageFirstPage() {
   let socket = io(SOCKET_URL);
   socket.on("message", (msg) => {
     dispatch(getTweetsActionCreator());
-    console.log(msg);
+    //console.log(msg);
   });
 
   const dispatch = useDispatch();

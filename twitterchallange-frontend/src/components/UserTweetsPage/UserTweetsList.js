@@ -15,7 +15,7 @@ function UserTweetsList() {
   let socket = io(SOCKET_URL);
   socket.on("message", (msg) => {
     dispatch(getUserTweetsofSubsActionCreator(userName));
-    console.log(msg);
+    //console.log(msg);
   });
   const tweets = useSelector((store) => store.tweetReducer.userPage);
   useEffect(() => {
