@@ -37,9 +37,13 @@ const io = socketIO(server, {
   },
 });
 io.on("connection", function (socket) {
-  //receiving the newtweer from sendTweetPage
+  console.log(socket.id + "user connected");
   socket.on("newTweet", (msg) => {
+    console.log(msg);
     io.emit("message", msg);
+  });
+  socket.on("disconnect", function () {
+    console.log("A client has disconnected from the server");
   });
 });
 

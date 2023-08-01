@@ -1,18 +1,17 @@
 //Outsource JS library
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import io from "socket.io-client";
 
 //Internal JS
 import TweetCard from "./TweetCard";
 import { getTweetsActionCreator } from "../../store/actions/tweetAction";
-import { SOCKET_URL } from "../../endpoints/AxiosAuth";
+import { socket } from "../../endpoints/AxiosAuth";
 
 function HomePageFirstPage() {
-  let socket = io(SOCKET_URL);
   socket.on("message", (msg) => {
+    console.log(msg);
     dispatch(getTweetsActionCreator());
-    //console.log(msg);
+    console.log(tweets);
   });
 
   const dispatch = useDispatch();

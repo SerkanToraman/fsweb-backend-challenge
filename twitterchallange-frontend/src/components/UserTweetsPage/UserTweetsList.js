@@ -2,17 +2,16 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import io from "socket.io-client";
 
 //Internal JS
 import TweetCard from "../HomePage/TweetCard";
 import { getUserTweetsofSubsActionCreator } from "../../store/actions/tweetAction";
-import { SOCKET_URL } from "../../endpoints/AxiosAuth";
+import { socket } from "../../endpoints/AxiosAuth";
 
 function UserTweetsList() {
   const { userName } = useParams();
   const dispatch = useDispatch();
-  let socket = io(SOCKET_URL);
+
   socket.on("message", (msg) => {
     dispatch(getUserTweetsofSubsActionCreator(userName));
   });

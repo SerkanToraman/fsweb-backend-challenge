@@ -11,6 +11,7 @@ const initialState = {
 export function tweetReducer(state = initialState, action) {
   switch (action.type) {
     case tweetActions.getTweets:
+      console.log([...action.payload]);
       return { mainPage: [...action.payload] };
     case tweetActions.getSubTweets:
       return { subPage: [...action.payload] };

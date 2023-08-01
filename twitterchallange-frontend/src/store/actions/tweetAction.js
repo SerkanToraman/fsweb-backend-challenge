@@ -1,10 +1,9 @@
 //Outsource JS library
 import React from "react";
-import io from "socket.io-client";
+import { socket } from "../../endpoints/AxiosAuth";
 
 //Internal JS
 import axiosWithAuth from "../../endpoints/AxiosAuth";
-import { SOCKET_URL } from "../../endpoints/AxiosAuth";
 
 //Action Creators
 
@@ -18,7 +17,6 @@ export const tweetActions = {
   dislikeTweet: "DISLIKE_TWEET",
 };
 
-let socket = io(SOCKET_URL);
 export const getTweetsActionCreator = () => (dispatch) => {
   axiosWithAuth()
     .get("/api/tweets/mainpage")
@@ -123,7 +121,7 @@ export const sendSubLikesofTweetsCreator = (dataSet) => (dispatch) => {
     .post("/api/likes/like", data)
     .then((res) => {
       dispatch(getSubTweetsActionCreator(tweetid));
-      socket.emit("newTweet", "deneme");
+      socket.emit("newTweet", "deneme", "deneme");
     });
 };
 export const sendSubDislikeofTweetsCreator = (dataSet) => (dispatch) => {
