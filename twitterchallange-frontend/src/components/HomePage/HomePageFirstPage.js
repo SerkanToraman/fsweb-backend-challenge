@@ -9,10 +9,10 @@ import { socket } from "../../endpoints/AxiosAuth";
 
 function HomePageFirstPage() {
   socket.on("message", (msg) => {
-    console.log(msg);
     dispatch(getTweetsActionCreator());
-    console.log(tweets);
+    socket.off("message");
   });
+ 
 
   const dispatch = useDispatch();
   const tweets = useSelector((store) => store.tweetReducer.mainPage);
