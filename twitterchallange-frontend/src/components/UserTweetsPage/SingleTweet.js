@@ -22,7 +22,7 @@ function SingleTweet() {
       endpoint: "/api/tweets/" + tweetid,
       reqType: REQ_TYPES.GET,
     });
-  }, [tweetById]);
+  }, [tweetid]);
 
   return (
     <section id="tweetCardContainer" key={tweetById?.tweet_id}>

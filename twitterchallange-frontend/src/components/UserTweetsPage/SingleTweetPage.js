@@ -20,9 +20,10 @@ function SingleTweetPage() {
     //console.log(msg);
   });
   const childTweetById = useSelector((store) => store.tweetReducer.subPage);
+  
   useEffect(() => {
     dispatch(getSubTweetsActionCreator(tweetid));
-  }, [tweetid]);
+  }, []);
 
   return (
     <>

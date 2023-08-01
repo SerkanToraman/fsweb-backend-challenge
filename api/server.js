@@ -32,6 +32,8 @@ app.use(cors());
 const io = socketIO(server, {
   cors: {
     origin: "*",
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
   },
 });
 io.on("connection", function (socket) {
